@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>五日纪行 · 账单分析</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200..900;1,9..144,200..900&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --paper: #f3ede1;
+  --paper-light: #faf6ec;
+  --paper-warm: #efe7d6;
+  --ink: #1c1813;
+  --ink-80: rgba(28, 24, 19, 0.8);
+  --ink-60: rgba(28, 24, 19, 0.6);
+  --ink-40: rgba(28, 24, 19, 0.4);
+  --ink-25: rgba(28, 24, 19, 0.25);
+  --ink-12: rgba(28, 24, 19, 0.12);
+  --ink-06: rgba(28, 24, 19, 0.06);
+  --vermilion: #b8412d;
+  --gold: #997b3a;
+}
+
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "tnum" on;
+}
+
+body {
+  background-image: 
+    radial-gradient(ellipse at 15% 20%, rgba(184, 65, 45, 0.04), transparent 45%),
+    radial-gradient(ellipse at 85% 75%, rgba(153, 123, 58, 0.05), transparent 50%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.serif { font-family: 'Noto Serif SC', serif; }
+.frq { font-family: 'Fraunces', serif; }
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 56px 36px 96px;
+}
+
+/* ========= Masthead ========= */
+
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 14px 0 12px;
+  margin-bottom: 80px;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+.masthead-mid { 
+  font-family: 'Fraunces', serif; 
+  font-style: italic; 
+  text-transform: none; 
+  letter-spacing: 0.02em;
+  font-size: 14px;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+/* ========= Hero ========= */
+
+.hero {
+  margin-bottom: 88px;
+  animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.hero-eyebrow {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--vermilion);
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.hero-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ink-25);
+  max-width: 100px;
+}
+.hero-title {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 900;
+  font-size: clamp(64px, 13vw, 152px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.hero-title-en {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(20px, 3.2vw, 32px);
+  color: var(--ink-60);
+  letter-spacing: 0.01em;
+  margin-bottom: 48px;
+}
+.hero-route {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  align-items: center;
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 500;
+  font-size: clamp(15px, 2vw, 20px);
+  padding-top: 28px;
+  border-top: 1px solid var(--ink-25);
+}
+.hero-route-line { 
+  width: 24px; 
+  height: 1px; 
+  background: var(--ink-40); 
+  display: inline-block;
+}
+
+/* ========= Total ========= */
+
+.total-panel {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 56px;
+  margin-bottom: 128px;
+  align-items: end;
+  animation: fadeUp 1s 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+.total-label {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--vermilion);
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+.total-amount {
+  font-family: 'Fraunces', serif;
+  font-weight: 200;
+  font-size: clamp(88px, 17vw, 196px);
+  line-height: 0.82;
+  letter-spacing: -0.055em;
+  font-feature-settings: "tnum" on, "lnum" on;
+  margin-bottom: 8px;
+}
+.total-amount .currency {
+  font-style: italic;
+  color: var(--vermilion);
+  font-weight: 300;
+  font-size: 0.42em;
+  vertical-align: top;
+  margin-right: 0.04em;
+  letter-spacing: 0;
+}
+.total-amount .decimal {
+  font-size: 0.46em;
+  color: var(--ink-40);
+  letter-spacing: -0.025em;
+  font-style: italic;
+}
+.total-meta {
+  border-left: 1px solid var(--vermilion);
+  padding-left: 28px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+}
+.total-meta-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--ink-25);
+  align-items: baseline;
+}
+.total-meta-row:last-child { border-bottom: none; padding-bottom: 0; }
+.total-meta-row > span:first-child { color: var(--ink-60); }
+.total-meta-row > span:last-child {
+  font-family: 'Fraunces', serif;
+  font-feature-settings: "tnum" on;
+  font-weight: 400;
+  font-size: 17px;
+}
+
+/* ========= Section ========= */
+
+.section { 
+  margin-bottom: 104px; 
+  animation: fadeUp 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 28px;
+  margin-bottom: 56px;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 18px;
+}
+.section-num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--vermilion);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 700;
+  font-size: clamp(30px, 4.4vw, 46px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  flex: 1;
+}
+.section-en {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--ink-40);
+  white-space: nowrap;
+}
+
+/* ========= Categories ========= */
+
+.cat-table {
+  display: flex;
+  flex-direction: column;
+}
+.cat-row {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  gap: 24px;
+  align-items: center;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--ink-12);
+  transition: padding 0.3s ease;
+}
+.cat-row:hover { background: rgba(255, 252, 244, 0.4); }
+.cat-rank {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--ink-25);
+  font-feature-settings: "tnum" on;
+}
+.cat-main { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px; 
+  min-width: 0;
+}
+.cat-top { 
+  display: flex; 
+  align-items: baseline; 
+  gap: 14px; 
+  flex-wrap: wrap;
+}
+.cat-name {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+}
+.cat-detail {
+  font-size: 12px;
+  color: var(--ink-60);
+  letter-spacing: 0.01em;
+}
+.cat-bar {
+  height: 3px;
+  background: var(--ink-06);
+  position: relative;
+  overflow: hidden;
+}
+.cat-bar-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--ink);
+  animation: barGrow 1.4s cubic-bezier(0.7, 0, 0.3, 1) backwards;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+.cat-row.featured .cat-bar-fill { background: var(--vermilion); }
+.cat-amount {
+  text-align: right;
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: 24px;
+  font-feature-settings: "tnum" on;
+  letter-spacing: -0.015em;
+}
+.cat-amount .pct {
+  display: block;
+  font-style: italic;
+  font-size: 11px;
+  color: var(--ink-60);
+  margin-top: 4px;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+}
+
+/* ========= Daily ========= */
+
+.daily-wrap { padding-top: 32px; }
+.daily-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(8px, 2vw, 24px);
+  align-items: stretch;
+}
+.daily-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.daily-bar-area {
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-bottom: 1px solid var(--ink);
+}
+.daily-amount {
+  text-align: center;
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 400;
+  white-space: nowrap;
+  font-feature-settings: "tnum" on;
+  margin-bottom: 10px;
+  color: var(--ink-80);
+}
+.daily-col.peak .daily-amount {
+  color: var(--vermilion);
+  font-weight: 500;
+}
+.daily-bar {
+  width: 100%;
+  background: var(--ink);
+  animation: dailyGrow 1.4s cubic-bezier(0.7, 0, 0.3, 1) backwards;
+  transform-origin: bottom;
+  transform: scaleY(0);
+  min-height: 3px;
+}
+.daily-col.peak .daily-bar { background: var(--vermilion); }
+.daily-label {
+  text-align: center;
+  margin-top: 18px;
+}
+.daily-label-date {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: var(--ink-80);
+}
+.daily-label-place {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--ink);
+}
+.daily-col.peak .daily-label-place { color: var(--vermilion); }
+
+.daily-note {
+  margin-top: 36px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--ink-80);
+  background: var(--paper-warm);
+  padding: 24px 28px;
+  border-left: 2px solid var(--vermilion);
+}
+.daily-note .frq { font-style: italic; color: var(--vermilion); }
+
+/* ========= Insights ========= */
+
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--ink-25);
+  border: 1px solid var(--ink-25);
+}
+.insight-card {
+  background: var(--paper);
+  padding: 36px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  transition: background 0.5s ease;
+  min-height: 200px;
+}
+.insight-card:hover { background: var(--paper-light); }
+.insight-num {
+  font-family: 'Fraunces', serif;
+  font-weight: 200;
+  font-size: 56px;
+  line-height: 0.95;
+  color: var(--vermilion);
+  letter-spacing: -0.04em;
+  font-feature-settings: "tnum" on, "lnum" on;
+  margin-bottom: 6px;
+}
+.insight-num small { 
+  font-size: 0.42em; 
+  color: var(--ink-40); 
+  margin-left: 4px; 
+  font-style: italic; 
+  font-weight: 300; 
+}
+.insight-num em {
+  font-style: italic;
+  color: var(--vermilion);
+  font-weight: 300;
+}
+.insight-label {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+}
+.insight-body {
+  font-size: 13px;
+  color: var(--ink-60);
+  line-height: 1.7;
+  margin-top: auto;
+}
+
+/* ========= Top items ========= */
+
+.topitem-list {
+  display: flex;
+  flex-direction: column;
+}
+.topitem {
+  display: grid;
+  grid-template-columns: 32px 1fr auto auto;
+  gap: 28px;
+  align-items: baseline;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--ink-12);
+}
+.topitem-rank {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--vermilion);
+  font-size: 16px;
+  font-weight: 400;
+}
+.topitem-name {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: 0.005em;
+}
+.topitem-cat {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.topitem-amt {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 300;
+  font-feature-settings: "tnum" on;
+  letter-spacing: -0.01em;
+  text-align: right;
+  min-width: 130px;
+}
+
+/* ========= Detail ledger ========= */
+
+.ledger {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px 48px;
+}
+.day-block { 
+  display: flex; 
+  flex-direction: column;
+}
+.day-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--ink);
+}
+.day-date {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 24px;
+  font-weight: 400;
+}
+.day-place {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--vermilion);
+  letter-spacing: 0.05em;
+}
+.day-total {
+  font-family: 'Fraunces', serif;
+  font-feature-settings: "tnum" on;
+  font-size: 16px;
+  font-weight: 400;
+}
+.day-list {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+.day-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px dotted var(--ink-12);
+  gap: 12px;
+}
+.day-item:last-child { border-bottom: none; }
+.day-item-name {
+  color: var(--ink-80);
+  font-family: 'Noto Serif SC', serif;
+  flex: 1;
+  min-width: 0;
+}
+.day-item-amt {
+  font-family: 'Fraunces', serif;
+  color: var(--ink);
+  font-feature-settings: "tnum" on;
+  white-space: nowrap;
+}
+
+/* ========= Footer ========= */
+
+.footer {
+  margin-top: 96px;
+  padding-top: 28px;
+  border-top: 2px solid var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+.footer-mark {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 14px;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+/* ========= Animations ========= */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes barGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes dailyGrow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+.section:nth-of-type(2) { animation-delay: 0.05s; }
+.section:nth-of-type(3) { animation-delay: 0.1s; }
+.section:nth-of-type(4) { animation-delay: 0.15s; }
+.section:nth-of-type(5) { animation-delay: 0.2s; }
+
+/* Stagger bars */
+.cat-row:nth-child(1) .cat-bar-fill { animation-delay: 0.4s; }
+.cat-row:nth-child(2) .cat-bar-fill { animation-delay: 0.5s; }
+.cat-row:nth-child(3) .cat-bar-fill { animation-delay: 0.6s; }
+.cat-row:nth-child(4) .cat-bar-fill { animation-delay: 0.7s; }
+.cat-row:nth-child(5) .cat-bar-fill { animation-delay: 0.8s; }
+.cat-row:nth-child(6) .cat-bar-fill { animation-delay: 0.85s; }
+.cat-row:nth-child(7) .cat-bar-fill { animation-delay: 0.9s; }
+.cat-row:nth-child(8) .cat-bar-fill { animation-delay: 0.95s; }
+
+.daily-col:nth-child(1) .daily-bar { animation-delay: 0.3s; }
+.daily-col:nth-child(2) .daily-bar { animation-delay: 0.4s; }
+.daily-col:nth-child(3) .daily-bar { animation-delay: 0.5s; }
+.daily-col:nth-child(4) .daily-bar { animation-delay: 0.6s; }
+.daily-col:nth-child(5) .daily-bar { animation-delay: 0.7s; }
+
+/* ========= Mobile ========= */
+
+@media (max-width: 720px) {
+  .container { padding: 32px 22px 64px; }
+  .masthead { font-size: 9px; gap: 8px; padding: 12px 0 10px; margin-bottom: 48px; }
+  .masthead-mid { font-size: 12px; }
+  .hero { margin-bottom: 56px; }
+  .hero-title-en { margin-bottom: 36px; }
+  .total-panel { grid-template-columns: 1fr; gap: 36px; margin-bottom: 80px; }
+  .section { margin-bottom: 72px; }
+  .section-header { 
+    flex-wrap: wrap; 
+    gap: 4px 16px; 
+    margin-bottom: 36px; 
+    padding-bottom: 14px; 
+  }
+  .section-en { width: 100%; }
+  .cat-row { 
+    grid-template-columns: 20px 1fr; 
+    gap: 16px; 
+    padding: 18px 0;
+  }
+  .cat-amount { 
+    grid-column: 2; 
+    text-align: left; 
+    margin-top: 4px; 
+  }
+  .cat-name { font-size: 16px; }
+  .cat-amount { font-size: 20px; }
+  .daily-bar-area { height: 240px; }
+  .daily-amount { font-size: 11px; }
+  .daily-label-place { font-size: 11px; }
+  .daily-label-date { font-size: 12px; }
+  .insight-grid { grid-template-columns: 1fr; }
+  .insight-card { padding: 28px 24px; min-height: auto; }
+  .insight-num { font-size: 44px; }
+  .topitem { 
+    grid-template-columns: 24px 1fr auto; 
+    gap: 12px;
+    padding: 16px 0;
+  }
+  .topitem-cat { 
+    grid-column: 2 / 4; 
+    font-size: 10px; 
+    margin-top: 2px;
+  }
+  .topitem-name { font-size: 15px; }
+  .topitem-amt { font-size: 18px; min-width: auto; }
+  .ledger { grid-template-columns: 1fr; gap: 28px; }
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="masthead">
+    <div>04.24 — 04.28</div>
+    <div class="masthead-mid">A Travel Ledger</div>
+    <div>VOL. 04 / 2024</div>
+  </div>
+
+  <header class="hero">
+    <div class="hero-eyebrow">五日 · A Five-Day Roadtrip</div>
+    <h1 class="hero-title">五日纪行</h1>
+    <div class="hero-title-en">Five Days, in Numbers.</div>
+    <div class="hero-route">
+      <span>樟树</span><span class="hero-route-line"></span>
+      <span>珠海</span><span class="hero-route-line"></span>
+      <span>澳门</span><span class="hero-route-line"></span>
+      <span>深圳</span><span class="hero-route-line"></span>
+      <span>香港</span>
+    </div>
+  </header>
+
+  <section class="total-panel">
+    <div>
+      <div class="total-label">五日总支出 · Grand Total</div>
+      <div class="total-amount">
+        <span class="currency">¥</span>10,619<span class="decimal">.79</span>
+      </div>
+    </div>
+    <div class="total-meta">
+      <div class="total-meta-row"><span>日均</span><span>¥2,123.96</span></div>
+      <div class="total-meta-row"><span>总笔数</span><span>53 笔</span></div>
+      <div class="total-meta-row"><span>最高单日 · 4.26</span><span>¥3,999.27</span></div>
+      <div class="total-meta-row"><span>最低单日 · 4.24</span><span>¥807.54</span></div>
+      <div class="total-meta-row"><span>跨城</span><span>5 城 · 2 关</span></div>
+    </div>
+  </section>
+
+  <!-- ========= 01. 钱去哪儿了 ========= -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">— 01</span>
+      <h2 class="section-title">钱去哪儿了</h2>
+      <span class="section-en">Where it went</span>
+    </div>
+
+    <div class="cat-table">
+
+      <div class="cat-row featured">
+        <div class="cat-rank">i</div>
+        <div class="cat-main">
+          <div class="cat-top">
+            <span class="cat-name">住宿</span>
+            <span class="cat-detail">5 晚 · 樟树·珠海·澳门·深圳·香港</span>
+          </div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 100%"></div></div>
+        </div>
+        <div class="cat-amount">¥5,638.81<span class="pct">53.1%</span></div>
+      </div>
+
+      <div class="cat-row">
+        <div class="cat-rank">ii</div>
+        <div class="cat-main">
+          <div class="cat-top">
+            <span class="cat-name">餐饮</span>
+            <span class="cat-detail">14 笔 · 含奶茶·快餐·正餐</span>
+          </div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 23.5%"></div></div>
+        </div>
+        <div class="cat-amount">¥1,323.82<span class="pct">12.5%</span></div>
+      </div>
+
+      <div class="cat-row">
+        <div class="cat-rank">iii</div>
+        <div class="cat-main">
+          <div class="cat-top">
+            <span class="cat-name">驾车</span>
+            <span class="cat-detail">高速 ¥749.91 · 充电 ¥428.57</span>
+          </div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 20.9%"></div></div>
+        </div>
+        <div class="cat-amount">¥1,178.48<span class="pct">11.1%</span></div>
+      </div>
+
+      <div class="cat-row">
+        <div class="cat-rank">iv</div>
+        <div class="cat-main">
+          <div class="cat-top">
+            <span class="cat-name">赌场</span>
+            <span class="cat-detail">澳门 · 一笔</span>
+          </div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 17.7%"></div></div>
+        </div>
+        <div class="cat-amount">¥1,000.00<span class="pct">9.4%</span></div>
+      </div>
+
+      <div class="cat-row">
+        <div class="cat-rank">v</div>
+        <div class="cat-main">
+          <div class="cat-top">
+            <span class="cat-name">娱乐体验</span>
+            <span class="cat-detail">BigBus 巴士 · 维港游轮</span>
+          </div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 9.9%"></div></div>
+        </div>
+        <div class="cat-amount">¥556.00<span class="pct">5.2%</span></div>
+      </div>
+
+      <div class="cat-row">
+        <div class="cat-rank">vi</div>
+        <div class="cat-main">
+          <div class="cat-top">
+            <span class="cat-name">市内交通</span>
+            <span class="cat-detail">打车 ¥297 · 地铁公交 ¥96 · 停车 ¥113</span>
+          </div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 9.0%"></div></div>
+        </div>
+        <div class="cat-amount">¥506.67<span class="pct">4.8%</span></div>
+      </div>
+
+      <div class="cat-row">
+        <div class="cat-rank">vii</div>
+        <div class="cat-main">
+          <div class="cat-top">
+            <span class="cat-name">购物</span>
+            <span class="cat-detail">优衣库 · 名创优品 · 日用品</span>
+          </div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 4.0%"></div></div>
+        </div>
+        <div class="cat-amount">¥228.01<span class="pct">2.1%</span></div>
+      </div>
+
+      <div class="cat-row">
+        <div class="cat-rank">viii</div>
+        <div class="cat-main">
+          <div class="cat-top">
+            <span class="cat-name">通讯</span>
+            <span class="cat-detail">移动+联通流量包 × 2 次</span>
+          </div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 3.3%"></div></div>
+        </div>
+        <div class="cat-amount">¥188.00<span class="pct">1.8%</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========= 02. 五天的脚步 ========= -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">— 02</span>
+      <h2 class="section-title">五天的脚步</h2>
+      <span class="section-en">Day by day</span>
+    </div>
+
+    <div class="daily-wrap">
+      <div class="daily-grid">
+        <div class="daily-col">
+          <div class="daily-bar-area">
+            <div class="daily-amount">¥807.54</div>
+            <div class="daily-bar" style="height: 20.2%"></div>
+          </div>
+          <div class="daily-label">
+            <div class="daily-label-date">04 / 24</div>
+            <div class="daily-label-place">樟树</div>
+          </div>
+        </div>
+        <div class="daily-col">
+          <div class="daily-bar-area">
+            <div class="daily-amount">¥1,072.60</div>
+            <div class="daily-bar" style="height: 26.8%"></div>
+          </div>
+          <div class="daily-label">
+            <div class="daily-label-date">04 / 25</div>
+            <div class="daily-label-place">珠海</div>
+          </div>
+        </div>
+        <div class="daily-col peak">
+          <div class="daily-bar-area">
+            <div class="daily-amount">¥3,999.27</div>
+            <div class="daily-bar" style="height: 100%"></div>
+          </div>
+          <div class="daily-label">
+            <div class="daily-label-date">04 / 26</div>
+            <div class="daily-label-place">澳门</div>
+          </div>
+        </div>
+        <div class="daily-col">
+          <div class="daily-bar-area">
+            <div class="daily-amount">¥3,695.93</div>
+            <div class="daily-bar" style="height: 92.4%"></div>
+          </div>
+          <div class="daily-label">
+            <div class="daily-label-date">04 / 27</div>
+            <div class="daily-label-place">深圳·香港</div>
+          </div>
+        </div>
+        <div class="daily-col">
+          <div class="daily-bar-area">
+            <div class="daily-amount">¥1,044.45</div>
+            <div class="daily-bar" style="height: 26.1%"></div>
+          </div>
+          <div class="daily-label">
+            <div class="daily-label-date">04 / 28</div>
+            <div class="daily-label-place">香港</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="daily-note">
+        <span class="frq">4.26 与 4.27 两天</span>合计花了 <span class="frq">¥7,695.20</span>，占整趟行程的 <span class="frq">72.5%</span>——澳门和香港住宿的星级跳水般地提了一个档，钱包承压。
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= 03. 关键发现 ========= -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">— 03</span>
+      <h2 class="section-title">关键发现</h2>
+      <span class="section-en">Notable findings</span>
+    </div>
+
+    <div class="insight-grid">
+
+      <div class="insight-card">
+        <div class="insight-num">53<em>%</em></div>
+        <div class="insight-label">超过一半的钱花在睡觉上</div>
+        <div class="insight-body">
+          5 晚酒店 ¥5,638.81，住宿是这趟最大的开销。其中港澳两晚 ¥4,682.37，占住宿 83%——内地三晚加起来仅 ¥956.44，差距近 5 倍。
+        </div>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-num"><small>¥</small>2,611<small>.58</small></div>
+        <div class="insight-label">最贵的一笔：香港嘉里酒店</div>
+        <div class="insight-body">
+          一晚顶得上樟树+珠海+深圳三晚之和的 2.7 倍。位列单笔第二的是澳门新濠影汇 ¥2,070.79，前两名都是港澳豪华酒店。
+        </div>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-num"><small>¥</small>1,178<small>.48</small></div>
+        <div class="insight-label">在路上烧掉的钱</div>
+        <div class="insight-body">
+          高速过路费 ¥749.91，充电费 ¥428.57。其中 4.25 单日驾车花费 ¥579.67——那天高速一路冲到了珠海。
+        </div>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-num"><small>¥</small>1,000</div>
+        <div class="insight-label">澳门赌场的"娱乐税"</div>
+        <div class="insight-body">
+          单笔 ¥1,000，占 4.26 当日花销 25%，占总支出 9.4%。如果不算这一笔，4.26 仍然是最贵一天，但只贵出 4.27 三百块。
+        </div>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-num">3<em> 杯</em></div>
+        <div class="insight-label">奶茶共 ¥165.76</div>
+        <div class="insight-body">
+          奈雪 × 2（¥63.48 + ¥46）+ 霸王茶姬 × 1（¥56.28）。再加上必胜客和肯德基两顿，连锁品牌占餐饮约 25%。
+        </div>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-num"><small>¥</small>556</div>
+        <div class="insight-label">香港一日游的体验账单</div>
+        <div class="insight-body">
+          BigBus ¥356 + 维港游轮 ¥200。4.28 这天是最像"游客"的一天，没有住宿费，吃喝玩乐 + 来回交通 ¥1,044.45。
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========= 04. 最贵的几笔 ========= -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">— 04</span>
+      <h2 class="section-title">最贵的八笔</h2>
+      <span class="section-en">Top expenses</span>
+    </div>
+
+    <div class="topitem-list">
+      <div class="topitem">
+        <div class="topitem-rank">01</div>
+        <div class="topitem-name">香港嘉里酒店</div>
+        <div class="topitem-cat">住宿 · 04.27</div>
+        <div class="topitem-amt">¥2,611.58</div>
+      </div>
+      <div class="topitem">
+        <div class="topitem-rank">02</div>
+        <div class="topitem-name">澳门新濠影汇 W 酒店</div>
+        <div class="topitem-cat">住宿 · 04.26</div>
+        <div class="topitem-amt">¥2,070.79</div>
+      </div>
+      <div class="topitem">
+        <div class="topitem-rank">03</div>
+        <div class="topitem-name">赌场</div>
+        <div class="topitem-cat">娱乐 · 04.26</div>
+        <div class="topitem-amt">¥1,000.00</div>
+      </div>
+      <div class="topitem">
+        <div class="topitem-rank">04</div>
+        <div class="topitem-name">高速费</div>
+        <div class="topitem-cat">驾车 · 04.25</div>
+        <div class="topitem-amt">¥405.65</div>
+      </div>
+      <div class="topitem">
+        <div class="topitem-rank">05</div>
+        <div class="topitem-name">珠海亚朵酒店</div>
+        <div class="topitem-cat">住宿 · 04.25</div>
+        <div class="topitem-amt">¥383.00</div>
+      </div>
+      <div class="topitem">
+        <div class="topitem-rank">06</div>
+        <div class="topitem-name">美高梅面对面餐厅</div>
+        <div class="topitem-cat">餐饮 · 04.26</div>
+        <div class="topitem-amt">¥362.54</div>
+      </div>
+      <div class="topitem">
+        <div class="topitem-rank">07</div>
+        <div class="topitem-name">BigBus 香港敞篷巴士</div>
+        <div class="topitem-cat">娱乐 · 04.28</div>
+        <div class="topitem-amt">¥356.00</div>
+      </div>
+      <div class="topitem">
+        <div class="topitem-rank">08</div>
+        <div class="topitem-name">深圳全季酒店</div>
+        <div class="topitem-cat">住宿 · 04.27</div>
+        <div class="topitem-amt">¥345.12</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= 05. 完整账目 ========= -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">— 05</span>
+      <h2 class="section-title">完整账目</h2>
+      <span class="section-en">The full ledger</span>
+    </div>
+
+    <div class="ledger">
+
+      <div class="day-block">
+        <div class="day-head">
+          <div>
+            <div class="day-date">04 / 24</div>
+            <div class="day-place">樟树</div>
+          </div>
+          <div class="day-total">¥807.54</div>
+        </div>
+        <div class="day-list">
+          <div class="day-item"><span class="day-item-name">五味面馆</span><span class="day-item-amt">30.38</span></div>
+          <div class="day-item"><span class="day-item-name">邻几湿巾</span><span class="day-item-amt">23.00</span></div>
+          <div class="day-item"><span class="day-item-name">车充电费</span><span class="day-item-amt">109.63</span></div>
+          <div class="day-item"><span class="day-item-name">高速费</span><span class="day-item-amt">243.08</span></div>
+          <div class="day-item"><span class="day-item-name">樟树全季酒店</span><span class="day-item-amt">228.32</span></div>
+          <div class="day-item"><span class="day-item-name">肯德基</span><span class="day-item-amt">104.10</span></div>
+          <div class="day-item"><span class="day-item-name">车充电费</span><span class="day-item-amt">69.03</span></div>
+        </div>
+      </div>
+
+      <div class="day-block">
+        <div class="day-head">
+          <div>
+            <div class="day-date">04 / 25</div>
+            <div class="day-place">珠海</div>
+          </div>
+          <div class="day-total">¥1,072.60</div>
+        </div>
+        <div class="day-list">
+          <div class="day-item"><span class="day-item-name">补水喷雾+袜子</span><span class="day-item-amt">38.03</span></div>
+          <div class="day-item"><span class="day-item-name">车充电费</span><span class="day-item-amt">76.19</span></div>
+          <div class="day-item"><span class="day-item-name">泡面</span><span class="day-item-amt">16.00</span></div>
+          <div class="day-item"><span class="day-item-name">高速费</span><span class="day-item-amt">405.65</span></div>
+          <div class="day-item"><span class="day-item-name">车充电费</span><span class="day-item-amt">97.83</span></div>
+          <div class="day-item"><span class="day-item-name">珠海亚朵酒店</span><span class="day-item-amt">383.00</span></div>
+          <div class="day-item"><span class="day-item-name">必胜客</span><span class="day-item-amt">54.90</span></div>
+          <div class="day-item"><span class="day-item-name">亚朵早餐</span><span class="day-item-amt">1.00</span></div>
+        </div>
+      </div>
+
+      <div class="day-block">
+        <div class="day-head">
+          <div>
+            <div class="day-date">04 / 26</div>
+            <div class="day-place">澳门</div>
+          </div>
+          <div class="day-total">¥3,999.27</div>
+        </div>
+        <div class="day-list">
+          <div class="day-item"><span class="day-item-name">高速费</span><span class="day-item-amt">0.71</span></div>
+          <div class="day-item"><span class="day-item-name">移动流量包</span><span class="day-item-amt">48.00</span></div>
+          <div class="day-item"><span class="day-item-name">联通流量包</span><span class="day-item-amt">46.00</span></div>
+          <div class="day-item"><span class="day-item-name">高速费</span><span class="day-item-amt">1.90</span></div>
+          <div class="day-item"><span class="day-item-name">公交 × 2</span><span class="day-item-amt">10.18</span></div>
+          <div class="day-item"><span class="day-item-name">澳门新濠影汇 W 酒店</span><span class="day-item-amt">2,070.79</span></div>
+          <div class="day-item"><span class="day-item-name">打车</span><span class="day-item-amt">39.87</span></div>
+          <div class="day-item"><span class="day-item-name">奈雪的茶</span><span class="day-item-amt">63.48</span></div>
+          <div class="day-item"><span class="day-item-name">麻香牛肉面</span><span class="day-item-amt">149.41</span></div>
+          <div class="day-item"><span class="day-item-name">赌场</span><span class="day-item-amt">1,000.00</span></div>
+          <div class="day-item"><span class="day-item-name">优衣库袜子</span><span class="day-item-amt">101.08</span></div>
+          <div class="day-item"><span class="day-item-name">打车</span><span class="day-item-amt">28.03</span></div>
+          <div class="day-item"><span class="day-item-name">美高梅面对面餐厅</span><span class="day-item-amt">362.54</span></div>
+          <div class="day-item"><span class="day-item-name">霸王茶姬</span><span class="day-item-amt">56.28</span></div>
+          <div class="day-item"><span class="day-item-name">打车</span><span class="day-item-amt">21.00</span></div>
+        </div>
+      </div>
+
+      <div class="day-block">
+        <div class="day-head">
+          <div>
+            <div class="day-date">04 / 27</div>
+            <div class="day-place">深圳·香港</div>
+          </div>
+          <div class="day-total">¥3,695.93</div>
+        </div>
+        <div class="day-list">
+          <div class="day-item"><span class="day-item-name">深圳全季酒店</span><span class="day-item-amt">345.12</span></div>
+          <div class="day-item"><span class="day-item-name">香港嘉里酒店</span><span class="day-item-amt">2,611.58</span></div>
+          <div class="day-item"><span class="day-item-name">轻轨</span><span class="day-item-amt">13.59</span></div>
+          <div class="day-item"><span class="day-item-name">打车</span><span class="day-item-amt">33.50</span></div>
+          <div class="day-item"><span class="day-item-name">食全食美</span><span class="day-item-amt">123.00</span></div>
+          <div class="day-item"><span class="day-item-name">打车 × 2</span><span class="day-item-amt">100.53</span></div>
+          <div class="day-item"><span class="day-item-name">奈雪的茶</span><span class="day-item-amt">46.00</span></div>
+          <div class="day-item"><span class="day-item-name">停车费</span><span class="day-item-amt">112.00</span></div>
+          <div class="day-item"><span class="day-item-name">高速费</span><span class="day-item-amt">98.57</span></div>
+          <div class="day-item"><span class="day-item-name">充电费</span><span class="day-item-amt">75.89</span></div>
+          <div class="day-item"><span class="day-item-name">面馆 × 2</span><span class="day-item-amt">69.25</span></div>
+          <div class="day-item"><span class="day-item-name">停车费</span><span class="day-item-amt">1.00</span></div>
+          <div class="day-item"><span class="day-item-name">名创优品</span><span class="day-item-amt">65.90</span></div>
+        </div>
+      </div>
+
+      <div class="day-block">
+        <div class="day-head">
+          <div>
+            <div class="day-date">04 / 28</div>
+            <div class="day-place">香港</div>
+          </div>
+          <div class="day-total">¥1,044.45</div>
+        </div>
+        <div class="day-list">
+          <div class="day-item"><span class="day-item-name">联通流量包</span><span class="day-item-amt">46.00</span></div>
+          <div class="day-item"><span class="day-item-name">移动流量包</span><span class="day-item-amt">48.00</span></div>
+          <div class="day-item"><span class="day-item-name">地铁</span><span class="day-item-amt">36.32</span></div>
+          <div class="day-item"><span class="day-item-name">地铁</span><span class="day-item-amt">36.32</span></div>
+          <div class="day-item"><span class="day-item-name">吃饭</span><span class="day-item-amt">48.90</span></div>
+          <div class="day-item"><span class="day-item-name">BigBus</span><span class="day-item-amt">356.00</span></div>
+          <div class="day-item"><span class="day-item-name">打车</span><span class="day-item-amt">31.06</span></div>
+          <div class="day-item"><span class="day-item-name">游轮</span><span class="day-item-amt">200.00</span></div>
+          <div class="day-item"><span class="day-item-name">菠萝包</span><span class="day-item-amt">20.00</span></div>
+          <div class="day-item"><span class="day-item-name">7-Eleven</span><span class="day-item-amt">32.74</span></div>
+          <div class="day-item"><span class="day-item-name">麦当劳</span><span class="day-item-amt">145.84</span></div>
+          <div class="day-item"><span class="day-item-name">打车</span><span class="day-item-amt">43.27</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>END · 五日纪行</div>
+    <div class="footer-mark">a ledger of small things</div>
+    <div>¥10,619.79</div>
+  </footer>
+
+</div>
+</body>
+</html>
