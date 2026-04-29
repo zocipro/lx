@@ -182,6 +182,43 @@ body {
   letter-spacing: -0.025em;
   font-style: italic;
 }
+.total-aa {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 8px 16px 8px 14px;
+  background: var(--paper-warm);
+  border-left: 2px solid var(--vermilion);
+}
+.aa-label {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--vermilion);
+  font-weight: 500;
+}
+.aa-amount {
+  font-family: 'Fraunces', serif;
+  font-feature-settings: "tnum" on;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.aa-currency {
+  font-style: italic;
+  color: var(--vermilion);
+  margin-right: 0.05em;
+  font-weight: 300;
+}
+.aa-divide {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-40);
+}
 .total-meta {
   border-left: 1px solid var(--vermilion);
   padding-left: 28px;
@@ -329,8 +366,8 @@ body {
 .daily-wrap { padding-top: 32px; }
 .daily-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: clamp(8px, 2vw, 24px);
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(6px, 1.6vw, 18px);
   align-items: stretch;
 }
 .daily-col {
@@ -681,15 +718,15 @@ body {
 <div class="container">
 
   <div class="masthead">
-    <div>04.24 — 04.28</div>
-    <div class="masthead-mid">A Travel Ledger</div>
+    <div>04.24 — 04.29</div>
+    <div class="masthead-mid">A Travel Ledger · for two</div>
     <div>VOL. 04 / 2024</div>
   </div>
 
   <header class="hero">
-    <div class="hero-eyebrow">五日 · A Five-Day Roadtrip</div>
-    <h1 class="hero-title">五日纪行</h1>
-    <div class="hero-title-en">Five Days, in Numbers.</div>
+    <div class="hero-eyebrow">六日 · A Six-Day Roadtrip for Two</div>
+    <h1 class="hero-title">六日纪行</h1>
+    <div class="hero-title-en">Six Days, Two People, in Numbers.</div>
     <div class="hero-route">
       <span>樟树</span><span class="hero-route-line"></span>
       <span>珠海</span><span class="hero-route-line"></span>
@@ -701,14 +738,20 @@ body {
 
   <section class="total-panel">
     <div>
-      <div class="total-label">五日总支出 · Grand Total</div>
+      <div class="total-label">六日总支出 · Grand Total</div>
       <div class="total-amount">
-        <span class="currency">¥</span>10,619<span class="decimal">.79</span>
+        <span class="currency">¥</span>12,232<span class="decimal">.76</span>
+      </div>
+      <div class="total-aa">
+        <span class="aa-label">AA 人均</span>
+        <span class="aa-amount"><span class="aa-currency">¥</span>6,116.38</span>
+        <span class="aa-divide">÷ 2</span>
       </div>
     </div>
     <div class="total-meta">
-      <div class="total-meta-row"><span>日均</span><span>¥2,123.96</span></div>
-      <div class="total-meta-row"><span>总笔数</span><span>53 笔</span></div>
+      <div class="total-meta-row"><span>日均（两人）</span><span>¥2,038.79</span></div>
+      <div class="total-meta-row"><span>日均（人均）</span><span>¥1,019.40</span></div>
+      <div class="total-meta-row"><span>总笔数</span><span>66 笔</span></div>
       <div class="total-meta-row"><span>最高单日 · 4.26</span><span>¥3,999.27</span></div>
       <div class="total-meta-row"><span>最低单日 · 4.24</span><span>¥807.54</span></div>
       <div class="total-meta-row"><span>跨城</span><span>5 城 · 2 关</span></div>
@@ -730,11 +773,11 @@ body {
         <div class="cat-main">
           <div class="cat-top">
             <span class="cat-name">住宿</span>
-            <span class="cat-detail">5 晚 · 樟树·珠海·澳门·深圳·香港</span>
+            <span class="cat-detail">6 晚 · 全季 · 亚朵 · 新濠影汇 · 嘉里 · 香港</span>
           </div>
           <div class="cat-bar"><div class="cat-bar-fill" style="width: 100%"></div></div>
         </div>
-        <div class="cat-amount">¥5,638.81<span class="pct">53.1%</span></div>
+        <div class="cat-amount">¥5,981.73<span class="pct">48.9%</span></div>
       </div>
 
       <div class="cat-row">
@@ -742,11 +785,11 @@ body {
         <div class="cat-main">
           <div class="cat-top">
             <span class="cat-name">餐饮</span>
-            <span class="cat-detail">14 笔 · 含奶茶·快餐·正餐</span>
+            <span class="cat-detail">17 笔 · 含奶茶 8 杯（4 家 × 2 杯）</span>
           </div>
-          <div class="cat-bar"><div class="cat-bar-fill" style="width: 23.5%"></div></div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 28.4%"></div></div>
         </div>
-        <div class="cat-amount">¥1,323.82<span class="pct">12.5%</span></div>
+        <div class="cat-amount">¥1,697.03<span class="pct">13.9%</span></div>
       </div>
 
       <div class="cat-row">
@@ -756,45 +799,45 @@ body {
             <span class="cat-name">驾车</span>
             <span class="cat-detail">高速 ¥749.91 · 充电 ¥428.57</span>
           </div>
-          <div class="cat-bar"><div class="cat-bar-fill" style="width: 20.9%"></div></div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 19.7%"></div></div>
         </div>
-        <div class="cat-amount">¥1,178.48<span class="pct">11.1%</span></div>
+        <div class="cat-amount">¥1,178.48<span class="pct">9.6%</span></div>
       </div>
 
       <div class="cat-row">
         <div class="cat-rank">iv</div>
         <div class="cat-main">
           <div class="cat-top">
-            <span class="cat-name">赌场</span>
-            <span class="cat-detail">澳门 · 一笔</span>
+            <span class="cat-name">市内交通</span>
+            <span class="cat-detail">打车 ¥598 · 地铁公交 ¥197 · 停车 ¥390</span>
           </div>
-          <div class="cat-bar"><div class="cat-bar-fill" style="width: 17.7%"></div></div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 18.0%"></div></div>
         </div>
-        <div class="cat-amount">¥1,000.00<span class="pct">9.4%</span></div>
+        <div class="cat-amount">¥1,077.98<span class="pct">8.8%</span></div>
       </div>
 
       <div class="cat-row">
         <div class="cat-rank">v</div>
         <div class="cat-main">
           <div class="cat-top">
-            <span class="cat-name">娱乐体验</span>
-            <span class="cat-detail">BigBus 巴士 · 维港游轮</span>
+            <span class="cat-name">赌场</span>
+            <span class="cat-detail">澳门 · 单笔</span>
           </div>
-          <div class="cat-bar"><div class="cat-bar-fill" style="width: 9.9%"></div></div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 16.7%"></div></div>
         </div>
-        <div class="cat-amount">¥556.00<span class="pct">5.2%</span></div>
+        <div class="cat-amount">¥1,000.00<span class="pct">8.2%</span></div>
       </div>
 
       <div class="cat-row">
         <div class="cat-rank">vi</div>
         <div class="cat-main">
           <div class="cat-top">
-            <span class="cat-name">市内交通</span>
-            <span class="cat-detail">打车 ¥297 · 地铁公交 ¥96 · 停车 ¥113</span>
+            <span class="cat-name">娱乐体验</span>
+            <span class="cat-detail">M+ 博物馆 · BigBus · 维港游轮</span>
           </div>
-          <div class="cat-bar"><div class="cat-bar-fill" style="width: 9.0%"></div></div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 14.7%"></div></div>
         </div>
-        <div class="cat-amount">¥506.67<span class="pct">4.8%</span></div>
+        <div class="cat-amount">¥881.53<span class="pct">7.2%</span></div>
       </div>
 
       <div class="cat-row">
@@ -804,9 +847,9 @@ body {
             <span class="cat-name">购物</span>
             <span class="cat-detail">优衣库 · 名创优品 · 日用品</span>
           </div>
-          <div class="cat-bar"><div class="cat-bar-fill" style="width: 4.0%"></div></div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 3.8%"></div></div>
         </div>
-        <div class="cat-amount">¥228.01<span class="pct">2.1%</span></div>
+        <div class="cat-amount">¥228.01<span class="pct">1.9%</span></div>
       </div>
 
       <div class="cat-row">
@@ -816,19 +859,19 @@ body {
             <span class="cat-name">通讯</span>
             <span class="cat-detail">移动+联通流量包 × 2 次</span>
           </div>
-          <div class="cat-bar"><div class="cat-bar-fill" style="width: 3.3%"></div></div>
+          <div class="cat-bar"><div class="cat-bar-fill" style="width: 3.1%"></div></div>
         </div>
-        <div class="cat-amount">¥188.00<span class="pct">1.8%</span></div>
+        <div class="cat-amount">¥188.00<span class="pct">1.5%</span></div>
       </div>
 
     </div>
   </section>
 
-  <!-- ========= 02. 五天的脚步 ========= -->
+  <!-- ========= 02. 六天的脚步 ========= -->
   <section class="section">
     <div class="section-header">
       <span class="section-num">— 02</span>
-      <h2 class="section-title">五天的脚步</h2>
+      <h2 class="section-title">六天的脚步</h2>
       <span class="section-en">Day by day</span>
     </div>
 
@@ -876,18 +919,28 @@ body {
         </div>
         <div class="daily-col">
           <div class="daily-bar-area">
-            <div class="daily-amount">¥1,044.45</div>
-            <div class="daily-bar" style="height: 26.1%"></div>
+            <div class="daily-amount">¥1,024.45</div>
+            <div class="daily-bar" style="height: 25.6%"></div>
           </div>
           <div class="daily-label">
             <div class="daily-label-date">04 / 28</div>
             <div class="daily-label-place">香港</div>
           </div>
         </div>
+        <div class="daily-col">
+          <div class="daily-bar-area">
+            <div class="daily-amount">¥1,632.97</div>
+            <div class="daily-bar" style="height: 40.8%"></div>
+          </div>
+          <div class="daily-label">
+            <div class="daily-label-date">04 / 29</div>
+            <div class="daily-label-place">香港</div>
+          </div>
+        </div>
       </div>
 
       <div class="daily-note">
-        <span class="frq">4.26 与 4.27 两天</span>合计花了 <span class="frq">¥7,695.20</span>，占整趟行程的 <span class="frq">72.5%</span>——澳门和香港住宿的星级跳水般地提了一个档，钱包承压。
+        <span class="frq">4.26 与 4.27 两天</span>合计花了 <span class="frq">¥7,695.20</span>，占整趟行程的 <span class="frq">62.9%</span>——澳门和香港两晚星级酒店把账单推到了顶。AA 后两人各自承担一半。
       </div>
     </div>
   </section>
@@ -903,10 +956,18 @@ body {
     <div class="insight-grid">
 
       <div class="insight-card">
-        <div class="insight-num">53<em>%</em></div>
-        <div class="insight-label">超过一半的钱花在睡觉上</div>
+        <div class="insight-num">49<em>%</em></div>
+        <div class="insight-label">将近一半的钱花在睡觉上</div>
         <div class="insight-body">
-          5 晚酒店 ¥5,638.81，住宿是这趟最大的开销。其中港澳两晚 ¥4,682.37，占住宿 83%——内地三晚加起来仅 ¥956.44，差距近 5 倍。
+          6 晚酒店 ¥5,981.73，住宿是这趟最大的开销。港澳 3 晚（澳门+嘉里+4.29）合计 ¥5,025.29，占住宿 84%。AA 后人均住宿 ¥2,990.87。
+        </div>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-num"><small>¥</small>6,116<small>.38</small></div>
+        <div class="insight-label">AA 后每人花了多少</div>
+        <div class="insight-body">
+          总计 ¥12,232.76 ÷ 2 = 人均 ¥6,116.38，6 天人均 ¥1,019.40 / 天。如果不算赌场那笔，人均会降到 ¥5,616.38。
         </div>
       </div>
 
@@ -914,15 +975,15 @@ body {
         <div class="insight-num"><small>¥</small>2,611<small>.58</small></div>
         <div class="insight-label">最贵的一笔：香港嘉里酒店</div>
         <div class="insight-body">
-          一晚顶得上樟树+珠海+深圳三晚之和的 2.7 倍。位列单笔第二的是澳门新濠影汇 ¥2,070.79，前两名都是港澳豪华酒店。
+          一晚顶得上樟树+珠海+深圳三晚之和的 2.7 倍。AA 后这一晚每人 ¥1,305.79。位列第二的是澳门新濠影汇 ¥2,070.79（人均 ¥1,035.40）。
         </div>
       </div>
 
       <div class="insight-card">
-        <div class="insight-num"><small>¥</small>1,178<small>.48</small></div>
-        <div class="insight-label">在路上烧掉的钱</div>
+        <div class="insight-num">8<em> 杯</em></div>
+        <div class="insight-label">奶茶共 ¥218.02</div>
         <div class="insight-body">
-          高速过路费 ¥749.91，充电费 ¥428.57。其中 4.25 单日驾车花费 ¥579.67——那天高速一路冲到了珠海。
+          4 家 × 2 杯：奈雪（4.26 + 4.27）¥109.48、霸王茶姬 ¥56.28、茶百道 ¥52.26。每人喝了 4 杯，人均 ¥109.01。
         </div>
       </div>
 
@@ -930,23 +991,15 @@ body {
         <div class="insight-num"><small>¥</small>1,000</div>
         <div class="insight-label">澳门赌场的"娱乐税"</div>
         <div class="insight-body">
-          单笔 ¥1,000，占 4.26 当日花销 25%，占总支出 9.4%。如果不算这一笔，4.26 仍然是最贵一天，但只贵出 4.27 三百块。
+          单笔 ¥1,000，占 4.26 当日 25%，占总支出 8.2%。AA 后每人 ¥500——一晚说没就没。
         </div>
       </div>
 
       <div class="insight-card">
-        <div class="insight-num">3<em> 杯</em></div>
-        <div class="insight-label">奶茶共 ¥165.76</div>
+        <div class="insight-num"><small>¥</small>881<small>.53</small></div>
+        <div class="insight-label">三个真正的"游客时刻"</div>
         <div class="insight-body">
-          奈雪 × 2（¥63.48 + ¥46）+ 霸王茶姬 × 1（¥56.28）。再加上必胜客和肯德基两顿，连锁品牌占餐饮约 25%。
-        </div>
-      </div>
-
-      <div class="insight-card">
-        <div class="insight-num"><small>¥</small>556</div>
-        <div class="insight-label">香港一日游的体验账单</div>
-        <div class="insight-body">
-          BigBus ¥356 + 维港游轮 ¥200。4.28 这天是最像"游客"的一天，没有住宿费，吃喝玩乐 + 来回交通 ¥1,044.45。
+          M+ 博物馆 ¥325.53、BigBus ¥356、维港游轮 ¥200。4.28 + 4.29 这两天的香港行程几乎全花在体验上。
         </div>
       </div>
 
@@ -957,58 +1010,70 @@ body {
   <section class="section">
     <div class="section-header">
       <span class="section-num">— 04</span>
-      <h2 class="section-title">最贵的八笔</h2>
-      <span class="section-en">Top expenses</span>
+      <h2 class="section-title">最贵的十笔</h2>
+      <span class="section-en">Top expenses · with AA</span>
     </div>
 
     <div class="topitem-list">
       <div class="topitem">
         <div class="topitem-rank">01</div>
         <div class="topitem-name">香港嘉里酒店</div>
-        <div class="topitem-cat">住宿 · 04.27</div>
+        <div class="topitem-cat">住宿 · 04.27 · 人均 ¥1,305.79</div>
         <div class="topitem-amt">¥2,611.58</div>
       </div>
       <div class="topitem">
         <div class="topitem-rank">02</div>
         <div class="topitem-name">澳门新濠影汇 W 酒店</div>
-        <div class="topitem-cat">住宿 · 04.26</div>
+        <div class="topitem-cat">住宿 · 04.26 · 人均 ¥1,035.40</div>
         <div class="topitem-amt">¥2,070.79</div>
       </div>
       <div class="topitem">
         <div class="topitem-rank">03</div>
         <div class="topitem-name">赌场</div>
-        <div class="topitem-cat">娱乐 · 04.26</div>
+        <div class="topitem-cat">娱乐 · 04.26 · 人均 ¥500</div>
         <div class="topitem-amt">¥1,000.00</div>
       </div>
       <div class="topitem">
         <div class="topitem-rank">04</div>
         <div class="topitem-name">高速费</div>
-        <div class="topitem-cat">驾车 · 04.25</div>
+        <div class="topitem-cat">驾车 · 04.25 · 人均 ¥202.83</div>
         <div class="topitem-amt">¥405.65</div>
       </div>
       <div class="topitem">
         <div class="topitem-rank">05</div>
         <div class="topitem-name">珠海亚朵酒店</div>
-        <div class="topitem-cat">住宿 · 04.25</div>
+        <div class="topitem-cat">住宿 · 04.25 · 人均 ¥191.50</div>
         <div class="topitem-amt">¥383.00</div>
       </div>
       <div class="topitem">
         <div class="topitem-rank">06</div>
         <div class="topitem-name">美高梅面对面餐厅</div>
-        <div class="topitem-cat">餐饮 · 04.26</div>
+        <div class="topitem-cat">餐饮 · 04.26 · 人均 ¥181.27</div>
         <div class="topitem-amt">¥362.54</div>
       </div>
       <div class="topitem">
         <div class="topitem-rank">07</div>
         <div class="topitem-name">BigBus 香港敞篷巴士</div>
-        <div class="topitem-cat">娱乐 · 04.28</div>
+        <div class="topitem-cat">娱乐 · 04.28 · 人均 ¥178</div>
         <div class="topitem-amt">¥356.00</div>
       </div>
       <div class="topitem">
         <div class="topitem-rank">08</div>
         <div class="topitem-name">深圳全季酒店</div>
-        <div class="topitem-cat">住宿 · 04.27</div>
+        <div class="topitem-cat">住宿 · 04.27 · 人均 ¥172.56</div>
         <div class="topitem-amt">¥345.12</div>
+      </div>
+      <div class="topitem">
+        <div class="topitem-rank">09</div>
+        <div class="topitem-name">香港酒店</div>
+        <div class="topitem-cat">住宿 · 04.29 · 人均 ¥171.46</div>
+        <div class="topitem-amt">¥342.92</div>
+      </div>
+      <div class="topitem">
+        <div class="topitem-rank">10</div>
+        <div class="topitem-name">M+ 博物馆</div>
+        <div class="topitem-cat">娱乐 · 04.29 · 人均 ¥162.77</div>
+        <div class="topitem-amt">¥325.53</div>
       </div>
     </div>
   </section>
@@ -1120,7 +1185,7 @@ body {
             <div class="day-date">04 / 28</div>
             <div class="day-place">香港</div>
           </div>
-          <div class="day-total">¥1,044.45</div>
+          <div class="day-total">¥1,024.45</div>
         </div>
         <div class="day-list">
           <div class="day-item"><span class="day-item-name">联通流量包</span><span class="day-item-amt">46.00</span></div>
@@ -1131,10 +1196,33 @@ body {
           <div class="day-item"><span class="day-item-name">BigBus</span><span class="day-item-amt">356.00</span></div>
           <div class="day-item"><span class="day-item-name">打车</span><span class="day-item-amt">31.06</span></div>
           <div class="day-item"><span class="day-item-name">游轮</span><span class="day-item-amt">200.00</span></div>
-          <div class="day-item"><span class="day-item-name">菠萝包</span><span class="day-item-amt">20.00</span></div>
           <div class="day-item"><span class="day-item-name">7-Eleven</span><span class="day-item-amt">32.74</span></div>
           <div class="day-item"><span class="day-item-name">麦当劳</span><span class="day-item-amt">145.84</span></div>
           <div class="day-item"><span class="day-item-name">打车</span><span class="day-item-amt">43.27</span></div>
+        </div>
+      </div>
+
+      <div class="day-block">
+        <div class="day-head">
+          <div>
+            <div class="day-date">04 / 29</div>
+            <div class="day-place">香港</div>
+          </div>
+          <div class="day-total">¥1,632.97</div>
+        </div>
+        <div class="day-list">
+          <div class="day-item"><span class="day-item-name">茶餐厅</span><span class="day-item-amt">118.22</span></div>
+          <div class="day-item"><span class="day-item-name">茶百道</span><span class="day-item-amt">52.26</span></div>
+          <div class="day-item"><span class="day-item-name">打车</span><span class="day-item-amt">47.97</span></div>
+          <div class="day-item"><span class="day-item-name">M+ 博物馆</span><span class="day-item-amt">325.53</span></div>
+          <div class="day-item"><span class="day-item-name">MENYA KANKI</span><span class="day-item-amt">222.73</span></div>
+          <div class="day-item"><span class="day-item-name">打车</span><span class="day-item-amt">38.04</span></div>
+          <div class="day-item"><span class="day-item-name">打车</span><span class="day-item-amt">108.00</span></div>
+          <div class="day-item"><span class="day-item-name">地铁</span><span class="day-item-amt">44.72</span></div>
+          <div class="day-item"><span class="day-item-name">地铁</span><span class="day-item-amt">45.66</span></div>
+          <div class="day-item"><span class="day-item-name">酒店</span><span class="day-item-amt">342.92</span></div>
+          <div class="day-item"><span class="day-item-name">停车费</span><span class="day-item-amt">277.50</span></div>
+          <div class="day-item"><span class="day-item-name">八达通退卡费</span><span class="day-item-amt">9.42</span></div>
         </div>
       </div>
 
@@ -1142,9 +1230,9 @@ body {
   </section>
 
   <footer class="footer">
-    <div>END · 五日纪行</div>
-    <div class="footer-mark">a ledger of small things</div>
-    <div>¥10,619.79</div>
+    <div>END · 六日纪行</div>
+    <div class="footer-mark">a ledger of small things, split in two</div>
+    <div>¥12,232.76 ÷ 2</div>
   </footer>
 
 </div>
